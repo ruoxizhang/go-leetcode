@@ -1,28 +1,75 @@
-package five
+package main
 
 import (
 	"fmt"
 )
 
 func main() {
-	fmt.Println("test")
+	longestPalindrome("0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000")
 }
 
 func longestPalindrome(s string) string {
-	charArray := make([]rune, 0)
-	index := 0
-	longest := 0
-	openForThree := true
-	for i, singleChar := range s {
-		if singleChar == charArray[index] {
-			if index > 0 {
-				charArray = charArray[:index-1]
-			} else {
-				charArray = make([]rune, 0)
-			}
+	if len(s) == 0 {
+		return ""
+	}
 
-			longest = longest + 2
+	if len(s) == 1 {
+		return s
+	}
+	originalStringLen := len(s)
+	charArray := make([]rune, 2*originalStringLen+3)
+	p := make([]int, 2*originalStringLen+3)
 
+	charArray[0] = '$'
+	charArray[1] = '#'
+	for index, value := range s {
+		charArray[(index+1)*2] = value
+		charArray[(index+1)*2+1] = '#'
+	}
+	charArray[2*originalStringLen+2] = '&'
+
+	mx := 2
+	id := 2
+	for indexTemp := range charArray[2 : len(charArray)-1] {
+		index := indexTemp + 2
+		if mx > index {
+			p[index] = minNumber(mx-index, p[2*id-index])
+		} else {
+			p[index] = 1
+		}
+
+		for charArray[index+p[index]] == charArray[index-p[index]] {
+			p[index]++
+		}
+
+		if p[index]+index > mx {
+			mx = p[index] + index
+			id = index
 		}
 	}
+
+	longestLen := 0
+	longestIndex := 2
+	for index, value := range p {
+		if value > longestLen {
+			longestIndex = index
+			longestLen = value
+		}
+	}
+
+	resultChar := make([]rune, longestLen-1)
+
+	for i := 0; i < longestLen-1; i++ {
+		resultChar[i] = charArray[longestIndex-longestLen+1+1+2*i]
+	}
+
+	fmt.Printf(string(resultChar))
+	return string(resultChar)
+}
+
+func minNumber(a, b int) int {
+	if a < b {
+		return a
+	}
+	return b
 }
