@@ -5,6 +5,13 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "Launch 7",
+            "type": "go",
+            "request": "launch",
+            "mode": "debug",
+            "program": "${workspaceFolder}/seven"
+        },
+        {
             "name": "Launch 6",
             "type": "go",
             "request": "launch",
