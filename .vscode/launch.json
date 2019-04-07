@@ -5,6 +5,19 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "Launch 9",
+            "type": "go",
+            "request": "launch",
+            "mode": "debug",
+            "program": "${workspaceFolder}/nine"
+        },        {
+            "name": "Launch 8",
+            "type": "go",
+            "request": "launch",
+            "mode": "debug",
+            "program": "${workspaceFolder}/eight"
+        },
+        {
             "name": "Launch 7",
             "type": "go",
             "request": "launch",
