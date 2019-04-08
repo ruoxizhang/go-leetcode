@@ -5,6 +5,13 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "Launch 23",
+            "type": "go",
+            "request": "launch",
+            "mode": "debug",
+            "program": "${workspaceFolder}/tweentythree"
+        },
+        {
             "name": "Launch 9",
             "type": "go",
             "request": "launch",
