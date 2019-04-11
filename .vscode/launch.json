@@ -5,6 +5,20 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "Launch 11",
+            "type": "go",
+            "request": "launch",
+            "mode": "debug",
+            "program": "${workspaceFolder}/eleven"
+        },
+        {
+            "name": "Launch 33",
+            "type": "go",
+            "request": "launch",
+            "mode": "debug",
+            "program": "${workspaceFolder}/thirtythree"
+        },
+        {
             "name": "Launch 30",
             "type": "go",
             "request": "launch",
