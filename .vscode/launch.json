@@ -5,12 +5,40 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "Launch 47",
+            "type": "go",
+            "request": "launch",
+            "mode": "debug",
+            "program": "${workspaceFolder}/47"
+        },
+        {
+            "name": "Launch 46",
+            "type": "go",
+            "request": "launch",
+            "mode": "debug",
+            "program": "${workspaceFolder}/46"
+        },
+        {
+            "name": "Launch 45",
+            "type": "go",
+            "request": "launch",
+            "mode": "debug",
+            "program": "${workspaceFolder}/45"
+        },
+        {
+            "name": "Launch 38",
+            "type": "go",
+            "request": "launch",
+            "mode": "debug",
+            "program": "${workspaceFolder}/thirtyeight"
+        },
+        {
             "name": "Launch 16",
             "type": "go",
             "request": "launch",
             "mode": "debug",
             "program": "${workspaceFolder}/sixteen"
-        }, 
+        },
         {
             "name": "Launch 48",
             "type": "go",
