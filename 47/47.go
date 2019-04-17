@@ -6,53 +6,50 @@ func main() {
 	fmt.Printf("%v", permuteUnique([]int{-1, 2, -1, 2, 1, -1, 2, 1}))
 }
 
-func permuteUnique(nums []int) [][]int {
-	newNums := mergeSort(nums)
-	result := [][]int{}
-	backTrace(newNums, []int{}, &result)
-	return filterNums(result)
+func permuteUnique(nums []int) (result [][]int) {
+	find(nums, 0, &result)
+	return
 }
 
-func backTrace(nums []int, temp []int, result *[][]int) {
+func find(nums []int, index int, result *[][]int) {
+	if index == len(nums)-1 {
+		*result = append(*result, append([]int{}, nums...))
+	}
+	freq := make(map[int]bool, len(nums))
+	for i := index; i < len(nums); i++ {
+		if _, ok := freq[nums[i]]; ok {
+			continue
+		}
+		nums[index], nums[i] = nums[i], nums[index]
+		find(nums, index+1, result)
+		nums[index], nums[i] = nums[i], nums[index]
+		freq[nums[i]] = true
+	}
+}
+
+func permuteUniqueOld(nums []int) [][]int {
+	newNums := mergeSort(nums)
+	result := [][]int{}
+	backTraceOld(newNums, []int{}, &result)
+	return result
+}
+
+func backTraceOld(nums []int, temp []int, result *[][]int) {
 	if len(nums) == 0 {
 		*result = append(*result, temp)
 	} else {
+		usedNums := make(map[int]int, len(nums))
 		for i, val := range nums {
-			newTemp := append(temp, val)
-			newNums := make([]int, len(nums))
-			copy(newNums, nums)
-			newNums = append(newNums[:i], newNums[i+1:]...)
-			backTrace(newNums, newTemp, result)
+			if _, ok := usedNums[val]; !ok {
+				usedNums[val] = 1
+				newTemp := append(temp, val)
+				newNums := make([]int, len(nums))
+				copy(newNums, nums)
+				newNums = append(newNums[:i], newNums[i+1:]...)
+				backTraceOld(newNums, newTemp, result)
+			}
 		}
 	}
-}
-
-func filterNums(result [][]int) [][]int {
-	newResult := [][]int{}
-	for _, val := range result {
-		if !isContains(newResult, val) {
-			newResult = append(newResult, val)
-		}
-	}
-	return newResult
-}
-
-func isContains(result [][]int, temp []int) bool {
-	for _, val := range result {
-		if isArrayEquals(val, temp) {
-			return true
-		}
-	}
-	return false
-}
-
-func isArrayEquals(nums1 []int, nums2 []int) bool {
-	for i := 0; i < len(nums1); i++ {
-		if nums1[i] != nums2[i] {
-			return false
-		}
-	}
-	return true
 }
 
 func mergeSort(nums []int) []int {
