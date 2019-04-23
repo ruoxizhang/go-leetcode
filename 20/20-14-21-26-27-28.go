@@ -165,11 +165,9 @@ func searchRange(nums []int, target int) []int {
 	if resultStart != -1 {
 		resultEnd := findTheLast(nums, target)
 		return []int{resultStart, resultEnd}
-	} else {
-		return []int{-1, -1}
 	}
-
 	return []int{-1, -1}
+
 }
 
 func findTheFirst(nums []int, target int) int {
